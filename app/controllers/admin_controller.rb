@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :authorize_admin
+  before_filter :authorize_admin, except: [:user_cancellation]
 
   def new_user
     @user = User.new
@@ -7,8 +7,7 @@ class AdminController < ApplicationController
   end
 
   def user_cancellation
-    binding.pry
-    render 'welcome/goodbye'
+    render '/welcome/goodbye'
   end
 
   def index
