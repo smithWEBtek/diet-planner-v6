@@ -1,16 +1,16 @@
-<h1>Group Edit Page</h1>
+<h1>FoodGroup Edit Page</h1>
 <div>
-<h3>Current data: </h3>
+  <h3>Current data:
+  </h3>
   <p class='index_view'>Name:</p><%= @group.name %><br>
 
-<%= form_for(@group) do |f| %>
+  <%= form_for(@group) do |f| %>
   <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
   </p>
 
-<%= f.submit %>
-<% end %>   
- 
+  <%= f.submit %>
+  <% end %>
 
 </div>

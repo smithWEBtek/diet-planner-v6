@@ -3,26 +3,22 @@ notes: rails portfolio project: diet-planner
 --------------------------------------------------
 170205
 
--[] Bootstrap theme
-    find Avi video where he starts with Bootstrap theme
-    https://www.youtube.com/watch?v=sHhJkSV1Qak
 -[] Demo video
--[] Search box for foods
 -[] Sort links in Foods index, by Cals, Group, Diet
 -[] Admin view / report of 'no group chosen' foods, to edit/update
 
 Issues:  Critical - High - Med - Low
--[] Issue:Med 
+-[] Issue:Med
     User/:id/edit, updates, but logs user out, should go to the show page
       - not sure, but maybe Devise is doing this(?)
--[] Issue:High: 
+-[] Issue:High:
     Facebook login fails 1st time, (usually), then succeeds, why?
       - possibly an issue with 'sign_out' method?
 
 -[x] Edit meal won't allow 'new_food'
 -[x] get field_with_errors working on new meal form
     - must have one or the other, cannot have both (food_id, or new_food)
- 
+
 -[x] Your forms should correctly display validation errors. Your fields should be enclosed within a fields_with_errors class and error messages describing the validation failures must be present within the view.
 -[x]  users_controller.rb:  # before_action :authorize_admin, only: [:edit, :update, :destroy]
 
@@ -55,16 +51,16 @@ form = edit or new single model: @model
 
 --------------------------------------------------
 170203
- 
+
 -[x] food_attributes= method for first_or_create(name: food_attributes[:name])
- 
- 
-----------------------------------------------------------------------------
 
-170202 
 
 ----------------------------------------------------------------------------
-170201 
+
+170202
+
+----------------------------------------------------------------------------
+170201
 
 _ [X] Meals is invalid, error again. (had :food instead of :id, after trying to sort. fixed)
 - [X]  -DietStats MathMethods moved to Application Controller
@@ -72,7 +68,7 @@ _ [X] Meals is invalid, error again. (had :food instead of :id, after trying to 
 - [X] Sort collection_select by name instead of ID: ex: Author.order('created_at DESC'),
 - [X] Meal form fix: direct User to create new Food, if not in drop down
     better yet, create a form to capture text input and find or create Food
-    - for now, we'll put up a link and directions to create a food if you dont' see it in the list. 
+    - for now, we'll put up a link and directions to create a food if you dont' see it in the list.
 - [X] DietDashboard => users/:id/show page w/ partials for sections
 - [X]   -Implement partials in views for DietDashboard and user/:id/show
 - [X]   -Replace main nav bar; move to user/show page with partials
@@ -86,9 +82,9 @@ _ [X] Meals is invalid, error again. (had :food instead of :id, after trying to 
 - [X]  -Meal form defaults to today's date
 - [X]  -Log form defaults to today's date
 
-170130 
+170130
 - [X] diet destroy method, reassigns default diet value 10
-- [X] divide by 0 error 
+- [X] divide by 0 error
       # def self.avg_cals_per_meal(group)
       #   group_cals(group) / group_meals_count(group)    
       # end
@@ -106,7 +102,7 @@ _ [X] Meals is invalid, error again. (had :food instead of :id, after trying to 
       @fishatarians = User.group_cals(User.fishatarians)    
       @carnivores = User.group_cals(User.carnivores)   
       @lumberjacks = User.group_cals(User.lumberjacks)    
-      @vampires = User.group_cals(User.vampires) 
+      @vampires = User.group_cals(User.vampires)
       @junkers = User.group_cals(User.junkers)
 
     for each diet_user_group: self.total_cals method, for # of cals for group
@@ -128,13 +124,13 @@ _ [X] Meals is invalid, error again. (had :food instead of :id, after trying to 
       - Status vs Diet
       - Ranking among dieters on same diet
 -[] MyJournal
-      - FORM: 
+      - FORM:
           Create a note on anything, can be journal of diet, emotions, reminders, recipes
           Title and content boxes only
           Record selfie video option
           Journal entries have their own form and save button
-      - VIEW: 
-          List of past journal entries (headings) to scroll 
+      - VIEW:
+          List of past journal entries (headings) to scroll
       - Bording the form: Snapchat videos of forum friends with their latest encouraging video snippet
       - Soft Core Diet Porn:
           Hot people eating health foods, winking at the camera
@@ -148,7 +144,7 @@ _ [X] Meals is invalid, error again. (had :food instead of :id, after trying to 
 - [X] MyMeals
       -FORM: Multiple Meals with existing user, via nested form
 
-- [X] Scoped resource: users/:id/logs/:id 
+- [X] Scoped resource: users/:id/logs/:id
 - [X] Get nested resource requirement working with logs nested under user
       - Migration CreateLogs references:user
 
@@ -185,7 +181,7 @@ Log only references meal_id, food_id, if needed.
 
 
 170121
- 
+
 Description of DietPlanner app, models and flow
 
 Users sign up, sign in, can authorize via Facebook Omniauth
@@ -194,7 +190,7 @@ Users sign up, sign in, can authorize via Facebook Omniauth
   User can be admin, only if an existing admin updates their user.admin field to "true"
   User can EDIT their own data: name, email, password, weight, diet
   User can create new Diet, Food or Group
- 
+
 
 User
   Meal
@@ -224,17 +220,17 @@ user/:id/meals/:id
 User
   :has_many :user_meals
   :has_many :meals, through: :user_meals
-  
+
   id, name, email, password, diet_id, weight
 
-Meal 
+Meal
   :has_many :user_meals
   :has_many :users, through: :user_meals
     id, name
 
 UserMeal is an instance of: User has a meal
   :belongs_to :user
-  :belongs_to :meal 
+  :belongs_to :meal
     id, user_id, meal_id, food_id, qty, note
 
 
@@ -244,7 +240,7 @@ UserMeal is an instance of: User has a meal
   user fills a form for a user_meal: (name: "snack") record
 
   User has views for UserMeals
- 
+
 Food is a list of approx. 30 items, 3 for each of 10 Groups via a single (group_id)
   Food belongs_to :group
   Food has_many :meals
@@ -264,25 +260,25 @@ Log(s): nested under User (/users/:id/logs/:id)
     need to add dependency here
 
 Diet is a list of common diets (Vegan, Carnivore, Balanced Protein/Carb, Junk, etc.)
-  Default is "no Diet chosen", User show page has a link prompting to "Choose a diet" 
-  User can VIEW existing Diets, Meals, Foods, Groups 
+  Default is "no Diet chosen", User show page has a link prompting to "Choose a diet"
+  User can VIEW existing Diets, Meals, Foods, Groups
   User can CREATE new Diet, Food, Group (Meal is static list, updatable by Admin only)
- 
+
 
 Day
   A reporting-only construct of 4 Meals, recorded by User as Log entries of log_type: "meal"
-  The Log class will have named scopes for reporting. 
-  For example: 
-  
+  The Log class will have named scopes for reporting.
+  For example:
+
   class Log < ActiveRecord::Base
-    scope :junk_dieters, -> { where(diet: 'junk')} 
-    scope :over_eaters, => { where(day_total_cals: > 3200) } 
+    scope :junk_dieters, -> { where(diet: 'junk')}
+    scope :over_eaters, => { where(day_total_cals: > 3200) }
 
       Log.all.junk_dieters.each do |dieter|
       dieter.user.email   
       app sends them an email that they chose too much junk_food on this Day of 4 meals
 
-    scope :over_eaters, => { where(day_total_cals: > 3200) } 
+    scope :over_eaters, => { where(day_total_cals: > 3200) }
       #gathers the Logs with this filter, returning the offending Users
       Log.all.over_eaters.each do |eater|
       eater.user.email
@@ -303,14 +299,14 @@ Group: id, name
 
 Food: id, group, subgroup, name, description
   (1, fruit, citrus, orange, clementine special)
- 
+
 User: id, name, weight, diet(id)
   (1, bob, 203, carnivore)
 
 Diet: id, name
   (1, LowCarb)
 
-Meal: id, name 
+Meal: id, name
   (1, breakfast, lunch, dinner, snack)
 
 Log: id, user, log_type, meal(id), food(id), qty, cals, note
@@ -331,11 +327,11 @@ at the point where he discusses addresses_attributes= vs addresses
 -[] User can edit the foods they created
 -[] Dry up admin tasks, partials
 
-  
+
 -[] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity)
 
 -[] Class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
- 
+
 -[] Nested form writing to associated model using custom attribute writer (form URL, model name e.g. /recipe/new, Item)
 
 -[] Include nested resource show or index (URL e.g. users/2/recipes)
@@ -361,7 +357,7 @@ Watched Avi video, try again tomorrow
 
 170116
 Finish reducing the data model
-  Add user:role_id's:  admin, editor, viewer, 
+  Add user:role_id's:  admin, editor, viewer,
   Build authentication logic and forms
 
 Nest foods under food_groups
@@ -413,8 +409,8 @@ Diet: Fishatarian
 
 170113
 EatRightWebSite:  plan and eat right by your choices
-  
-User 
+
+User
   belongs_to :diet
   id, name, email, password, weight, diet_id
 
@@ -453,7 +449,7 @@ Dish
     6, "duck", poultry => 6
     7, "pork", meat =>7
     8, "ho-ho", junk => 8
-      
+
 Group
   Fruits, Veggies, Junk,  Carbs, Meats, Desserts, Snacks
   id, name
@@ -466,8 +462,8 @@ Group
   7, "poultry"
   8, "nuts"
   9, "legumes"
-     
-  
+
+
 User experience
   Users can register, login, logout
   Users can view public data
@@ -475,14 +471,8 @@ User experience
   Users can allow chosen data to be viewable to registerd users
   Users can allow chosen data to be viewable to public
 
-Work steps: 
+Work steps:
 Generate migrations, models, controllers and ActiveRecord relationships
 Test with console
 
 Create views
-
-
-
-
-
-

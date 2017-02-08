@@ -6,6 +6,11 @@ class AdminController < ApplicationController
     render 'admin/new_user'
   end
 
+  def user_cancellation
+    binding.pry
+    render 'welcome/goodbye'
+  end
+
   def index
     @users = User.all
     @logs = Log.all
