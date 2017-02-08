@@ -11,7 +11,8 @@ class AdminController < ApplicationController
   end
 
   def quotes
-    render '/welcome/quotes'
+    @quotes = Quote.all 
+    redirect_to '/quotes/index'
   end
 
   def index
