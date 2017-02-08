@@ -10,11 +10,6 @@ class AdminController < ApplicationController
     render '/welcome/goodbye'
   end
 
-  def quotes
-    @quotes = Quote.all 
-    redirect_to '/quotes/index'
-  end
-
   def index
     @users = User.all
     @logs = Log.all

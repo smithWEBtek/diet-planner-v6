@@ -4,6 +4,7 @@ class Quote < ApplicationRecord
   belongs_to :adj
   belongs_to :food
   belongs_to :phrase
+  belongs_to :diet
 
 #   def build_quote
 #
@@ -24,8 +25,9 @@ class Quote < ApplicationRecord
     #
     # @quote = Quote.find(x)
     # @star =
-
-
-
+def build_quote
+  quote = self
+  "#{quote.celeb.name}, #{quote.verb.name} a #{quote.adj.name} #{quote.food.name}, while on the #{quote.diet.name} diet, and said #{quote.phrase.content}"
+end
 
 end
