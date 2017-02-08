@@ -1,36 +1,35 @@
 <h1>User Edit Page</h1>
 
- <%= form_for(@user) do |f| %>
-  <p>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :weight %>
-    <%= f.text_field :weight %>
-  </p>
-  <p>
-    <%= f.label :diet %>
-    <%= f.collection_select :diet_id, @diets, :id, :name %>
-  </p>
-  <% if current_user.admin? %>
-    <p>
-      <%= f.radio_button(:role, "standard") %>
-      <%= f.label(:role_standard, "standard") %>
+<%= form_for(@user) do |f| %>
+<p>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+</p>
+<p>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+</p>
+<p>
+  <%= f.label :password %>(required)
+  <%= f.password_field :password %>
+</p>
+<p>
+  <%= f.label :weight %>
+  <%= f.text_field :weight %>
+</p>
+<p>
+  <%= f.label :diet %>
+  <%= f.collection_select :diet_id, @diets, :id, :name %>
+</p>
+<% if current_user.admin? %>
+<p>
+  <%= f.radio_button(:role, "standard") %>
+  <%= f.label(:role_standard, "standard") %>
 
-      <%= f.radio_button(:role, "admin") %>
-      <%= f.label(:role_standard, "admin") %>
-    </p>
-  <% end %>
+  <%= f.radio_button(:role, "admin") %>
+  <%= f.label(:role_standard, "admin") %>
+</p>
+<% end %>
 <%= f.submit %>
 
-<% end %>   
- 
+<% end %>

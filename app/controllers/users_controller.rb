@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       flash[:notice] = "User Profile updated."
       redirect_to user_path(@user)
     else
-      redirect_to new_meal_path(@user)
+      redirect_to user_path(@user)
     end
   end
 
