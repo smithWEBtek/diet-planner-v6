@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :user_signed_in?, :admin?
 
-  def self.user_signed_in? 
+  def self.user_signed_in?
     !!current_user
   end
 
@@ -23,40 +23,40 @@ class ApplicationController < ActionController::Base
 
   def load_diet_stats
     @vegans_cals = User.group_cals(User.vegans)
-    @balancers_cals = User.group_cals(User.balancers)  
-    @lowcarbers_cals = User.group_cals(User.lowcarbers)   
-    @fishatarians_cals = User.group_cals(User.fishatarians)    
-    @carnivores_cals = User.group_cals(User.carnivores)   
-    @lumberjacks_cals = User.group_cals(User.lumberjacks)    
-    @vampires_cals = User.group_cals(User.vampires) 
+    @balancers_cals = User.group_cals(User.balancers)
+    @lowcarbers_cals = User.group_cals(User.lowcarbers)
+    @fishatarians_cals = User.group_cals(User.fishatarians)
+    @carnivores_cals = User.group_cals(User.carnivores)
+    @lumberjacks_cals = User.group_cals(User.lumberjacks)
+    @vampires_cals = User.group_cals(User.vampires)
     @junkers_cals = User.group_cals(User.junkers)
 
-    @vegans_meal_count = User.group_meals_count(User.vegans) 
-    @balancers_meal_count = User.group_meals_count(User.balancers)  
-    @lowcarbers_meal_count = User.group_meals_count(User.lowcarbers)   
-    @fishatarians_meal_count = User.group_meals_count(User.fishatarians)    
-    @carnivores_meal_count = User.group_meals_count(User.carnivores)   
-    @lumberjacks_meal_count = User.group_meals_count(User.lumberjacks)    
-    @vampires_meal_count = User.group_meals_count(User.vampires) 
+    @vegans_meal_count = User.group_meals_count(User.vegans)
+    @balancers_meal_count = User.group_meals_count(User.balancers)
+    @lowcarbers_meal_count = User.group_meals_count(User.lowcarbers)
+    @fishatarians_meal_count = User.group_meals_count(User.fishatarians)
+    @carnivores_meal_count = User.group_meals_count(User.carnivores)
+    @lumberjacks_meal_count = User.group_meals_count(User.lumberjacks)
+    @vampires_meal_count = User.group_meals_count(User.vampires)
     @junkers_meal_count = User.group_meals_count(User.junkers)
 
-    @vegans_avg_cals_per_meal = User.avg_cals_per_meal(User.vegans) 
-    @balancers_avg_cals_per_meal = User.avg_cals_per_meal(User.balancers)  
-    @lowcarbers_avg_cals_per_meal = User.avg_cals_per_meal(User.lowcarbers)   
-    @fishatarians_avg_cals_per_meal = User.avg_cals_per_meal(User.fishatarians)    
-    @carnivores_avg_cals_per_meal = User.avg_cals_per_meal(User.carnivores)   
-    @lumberjacks_avg_cals_per_meal = User.avg_cals_per_meal(User.lumberjacks)    
-    @vampires_avg_cals_per_meal = User.avg_cals_per_meal(User.vampires) 
+    @vegans_avg_cals_per_meal = User.avg_cals_per_meal(User.vegans)
+    @balancers_avg_cals_per_meal = User.avg_cals_per_meal(User.balancers)
+    @lowcarbers_avg_cals_per_meal = User.avg_cals_per_meal(User.lowcarbers)
+    @fishatarians_avg_cals_per_meal = User.avg_cals_per_meal(User.fishatarians)
+    @carnivores_avg_cals_per_meal = User.avg_cals_per_meal(User.carnivores)
+    @lumberjacks_avg_cals_per_meal = User.avg_cals_per_meal(User.lumberjacks)
+    @vampires_avg_cals_per_meal = User.avg_cals_per_meal(User.vampires)
     @junkers_avg_cals_per_meal = User.avg_cals_per_meal(User.junkers)
-  end 
-
+  end
+ 
   private
   def after_sign_out_path_for(current_user)
     current_user = nil
     root_path
   end
 
-  def admin? 
-    !!self.role == "admin" 
+  def admin?
+    !!self.role == "admin"
   end
 end
