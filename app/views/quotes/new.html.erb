@@ -11,7 +11,9 @@
 <%= f.label :food %>
 <%= f.collection_select :food_id, Food.all, :id, :name %><br>
 <%= f.label :phrase %>
-<%= f.collection_select :phrase_id, Phrase.all, :id, :content %>
+<%= f.collection_select :phrase_id, Phrase.all, :id, :content %><br>
+<%= f.label :diet %>
+<%= f.collection_select :diet_id, Diet.all, :id, :name %><br>
 
 <%# end %>
 <%= f.submit %>

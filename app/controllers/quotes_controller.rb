@@ -13,9 +13,10 @@ class QuotesController < ApplicationController
     end
 
     def create
-      raise params.inspect
-      @quote = Quote.create(quote_params)
+binding.pry
+      @quote = Quote.new(quote_params)
       if @quote.save
+        binding.pry
         flash[:notice] = "Quote saved."
         redirect_to root_path
       else
