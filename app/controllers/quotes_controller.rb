@@ -1,6 +1,16 @@
 class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :destroy]
 
+    def random_quotes
+      Quote.build_random_quotes
+      redirect_to quotes_path
+    end
+
+    def clear_quotes
+      Quote.all.each {|q|q.delete}
+      redirect_to quotes_path
+    end
+
     def new
       @quote = Quote.new
     end
