@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
 
+  get 'quotes/index'
+
+  get 'quotes/new'
+
+  get 'quotes/show'
+
+  get 'quotes/edit'
+
+  get 'quotes/update'
+
+  get 'quotes/destroy'
+
+  get 'quotes/create'
+
   get '/home', to: 'welcome#home'
   root 'welcome#home'
   get '/welcome/goodbye', to: 'admin#user_cancellation'
-  get '/welcome/quotes', to: 'admin#quotes'
 
   post '/users/:id/logs/new', to: 'logs#create'
   post '/users/:id/logs/:id/edit', to: 'logs#update'
@@ -28,4 +41,5 @@ Rails.application.routes.draw do
   resources :foods
   resources :admin
   resources :mealnames
+  resources :quotes
 end
