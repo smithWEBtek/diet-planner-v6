@@ -1,2 +1,18 @@
-<h1>Quotes#new</h1>
-<p>Find me in app/views/quotes/new.html.erb</p>
+<h3>New Quote</h3>
+
+<%= form_for(@quote) do |f| %>
+
+<%= f.label :celeb %>
+<%= f.collection_select :celeb_id, Celeb.all, :id, :name %><br>
+<%= f.label :verb %>
+<%= f.collection_select :verb_id, Verb.all, :id, :name %><br>
+<%= f.label :adj %>
+<%= f.collection_select :adj_id, Adj.all, :id, :name %><br>
+<%= f.label :food %>
+<%= f.collection_select :food_id, Food.all, :id, :name %><br>
+<%= f.label :phrase %>
+<%= f.collection_select :phrase_id, Phrase.all, :id, :content %>
+
+<%# end %>
+<%= f.submit %>
+<% end %>
