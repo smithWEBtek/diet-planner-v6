@@ -10,6 +10,16 @@ class AdminController < ApplicationController
     render '/welcome/goodbye'
   end
 
+  def group_update
+    @foods = []
+    Food.all.each do |food|
+      if food.group.name == "No group chosen"
+        @foods << food
+      end
+    end
+    render 'groups/group_update'
+  end
+
   def index
     @users = User.all
     @logs = Log.all

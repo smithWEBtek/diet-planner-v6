@@ -49,7 +49,18 @@ class ApplicationController < ActionController::Base
     @vampires_avg_cals_per_meal = User.avg_cals_per_meal(User.vampires)
     @junkers_avg_cals_per_meal = User.avg_cals_per_meal(User.junkers)
   end
- 
+
+  def load_user_foods
+    @user_foods = []
+    Food.all.each do |food|
+      if food.group.name == "No group chosen"
+        @user_foods << food
+      end
+    end
+    @user_foods
+    binding.pry
+  end
+
   private
   def after_sign_out_path_for(current_user)
     current_user = nil

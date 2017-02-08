@@ -1,4 +1,17 @@
 notes: rails portfolio project: diet-planner
+170208
+
+change title to diet-tracker
+
+admin reports
+
+ungrouped foods
+  user created foods, to confirm group choice
+  perhaps set up a submission process for user assigned foods
+
+user cancellation requests
+
+edit videos
 
 --------------------------------------------------
 170205

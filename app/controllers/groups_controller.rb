@@ -40,14 +40,14 @@ class GroupsController < ApplicationController
     if @group.delete
       flash[:notice] = "Group deleted"
       redirect_to groups_path
-    else 
+    else
       flash[:notice] = @group.errors.full_messages
       redirect_to group_path(@group)
     end
   end
 
   private
-    def set_group 
+    def set_group
       @group = Group.find_by_id(params[:id])
     end
 
@@ -55,4 +55,3 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:name)
     end
 end
-

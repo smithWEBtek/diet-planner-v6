@@ -3,9 +3,9 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
 
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :trackable, :validatable, 
+        :recoverable, :rememberable, :trackable, :validatable,
         :omniauthable, omniauth_providers: [:facebook]
-  
+
   has_many :meals
   has_many :foods, through: :meals
   belongs_to :diet
@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true, length: { minimum: 3 }
-  
+
   scope :undieters, -> { where(diet_id: '1')}
   scope :vegans, ->{ where(diet_id: '2')}
   scope :lowcarbers, ->{ where(diet_id: '3')}
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   scope :carnivores, ->{ where(diet_id: '6')}
   scope :lumberjacks, ->{ where(diet_id: '7')}
   scope :vampires, ->{ where(diet_id: '8')}
-  scope :junkers, -> { where(diet_id: '9')} 
+  scope :junkers, -> { where(diet_id: '9')}
 
   def self.group_cals(group)
     cals = []

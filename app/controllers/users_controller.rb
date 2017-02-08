@@ -34,12 +34,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
+    if !params[:user][:password].present?
+      flash[:notice] = "Password required for User Edit."
     @user.update(user_params)
     if @user.save
       flash[:notice] = "User Profile updated."
       redirect_to user_path(@user)
     else
       redirect_to user_path(@user)
+    end
     end
   end
 
