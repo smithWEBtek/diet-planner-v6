@@ -13,12 +13,10 @@ class QuotesController < ApplicationController
     end
 
     def create
-binding.pry
       @quote = Quote.new(quote_params)
       if @quote.save
-        binding.pry
         flash[:notice] = "Quote saved."
-        redirect_to root_path
+        redirect_to quotes_path
       else
         render :new
       end
@@ -34,14 +32,14 @@ binding.pry
         flash[:notice] = "Quote updated."
         redirect_to quote_path(@quote)
       else
-        redirect_to new_meal_path(@quote)
+        redirect_to new_quote_path
       end
     end
 
     def destroy
       if @quote.delete
         flash[:notice] = "Quote deleted"
-        redirect_to root_path
+        redirect_to quotes_path
       else
         flash[:notice] = @quote.errors.full_messages
         redirect_to quote_path(@quote)
