@@ -1,0 +1,14 @@
+<h3>Diet</h3>
+
+<div class='index_view'>
+  <%= render 'diets/diet', diet: @diet %>
+</div>
+<% if current_user.admin? %>
+  <%= link_to "Edit", edit_diet_path(@diet) %> | 
+  <%= link_to "Delete", diet_path(@diet), :method => :delete, :action => "destroy" %> | 
+  <%= link_to "New", new_diet_path %>   
+<% end %>
+<p>
+  Users on the <%= "#{@diet.name}" %> Diet: <br>
+  <%= render partial: 'users/users_diets', locals: { users: @diet.users }%>
+</p>

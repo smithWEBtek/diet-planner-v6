@@ -1,0 +1,71 @@
+
+
+<h3>User Profile</h3 > 
+ <div class="index_view">
+    <hr> 
+    Name: <%= @user.username %><br>
+    Email: <%= link_to @user.email, mail_to(@user.email) %><br>
+    Weight: <%= @user.weight %><br>
+    <% if @user.diet.name ==  "Choose a diet" %>
+     <p class='flash_style'>Diet:
+      <%= link_to "Please choose a diet", edit_user_path(@user) %></p>
+    <% else %>
+      Diet: <%= link_to @user.diet.name, diet_path(@user.diet) %><br>
+    <% end %>
+  </div>
+<div>
+  <hr>
+  <a href="#logs">Logs</a> |
+  <a href="#meals">Meals</a> |
+  <a href="#userstats">MyStats</a> |    
+  <a href="#dietstats">DietStats</a> |
+  <a href="#foods">Foods</a> |
+  <a href="#groups">Groups</a> |
+  <a href="#diets">Diets</a> |
+  <%= link_to 'Edit Profile', edit_user_path(@user) %> | 
+  <%= link_to 'Cancel Account', user_path, :method => :delete, :confirm => 'Are you sure?' %>
+</div>
+<div>
+  <h4>
+    <%= link_to "New Log", new_user_log_path(current_user) %> | 
+    <%= link_to "New Meal", new_meal_path %> | 
+    <%= link_to "New Food", new_food_path %> |
+  </h4>
+
+<hr>
+
+<h3 id="logs">Logs</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'logs/logs', locals: { logs: @user.logs }%>
+<hr>
+
+<h3 id="meals">Meals</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'meals/meals', locals: { meals: @user.meals }%>
+<hr>
+
+<h3 id="userstats">MyStats</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'users/userstats', locals: { user: @user} %>
+<hr>
+
+<h3 id="dietstats">Diet Stats</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'diets/dietstats', locals: { diets: @diets} %>
+<hr>
+
+<h3 id="diets">Diets</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'diets/diets', locals: { diets: @diets }%>
+<hr>
+
+<h3 id="foods">Foods</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'foods/foods', locals: { foods: @foods }%>
+<hr>
+
+<h3 id="groups">Groups</h3>
+  <a href="#top">^top</a><br><br>
+  <%= render partial: 'groups/groups', locals: { groups: @groups }%>
+<hr>
+

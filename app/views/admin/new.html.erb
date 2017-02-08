@@ -1,0 +1,18 @@
+<h3>Add Admin</h3>
+<p class="flash_style">
+  Admin promotes an existing standard user to Admin:
+</p>
+<%= form_for @user do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= radio_button_tag(:role, "standard") %>
+    <%= label_tag(:role_standard, "standard") %>
+
+    <%= radio_button_tag(:role, "admin") %>
+    <%= label_tag(:role_standard, "admin") %>
+  </p>
+  <%= f.submit "Save New Admin" %>
+<% end %>
