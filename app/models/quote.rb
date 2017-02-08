@@ -27,7 +27,7 @@ class Quote < ApplicationRecord
     # @star =
 def build_quote
   quote = self
-  "#{quote.celeb.name}, #{quote.verb.name} a #{quote.adj.name} #{quote.food.name}, while on the #{quote.diet.name} diet, and said #{quote.phrase.content}"
+  "#{quote.celeb.name}, #{quote.verb.name} a #{quote.adj.name} #{quote.food.name}, while on the #{quote.diet.name} diet, and said, '#{quote.phrase.content}'"
 end
 
 end
