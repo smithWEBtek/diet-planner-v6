@@ -24,7 +24,7 @@ class QuotesController < ApplicationController
       end
     end
 
-    def export_csv
+    def export_quotes_csv
       @quotes = Quote.all
       render '/quotes/index.csv.erb'
     end

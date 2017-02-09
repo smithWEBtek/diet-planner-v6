@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   get '/random_quotes', to: 'quotes#random_quotes'
   get '/group_update', to: 'admin#group_update'
   get '/clear_quotes', to: 'quotes#clear_quotes'
-  get '/export_csv', to: 'quotes#export_csv'
-  get '/export_user_csv', to: 'users#export_csv'
-  get '/export_user_data', to: 'admin#export_user_data'
 
+  get '/export_quotes_csv', to: 'quotes#export_quotes_csv'
+  get '/export_user_csv', to: 'users#export_csv'
+  get '/export_users_data', to: 'admin#export_users_data'
 
   post '/users/:id/logs/new', to: 'logs#create'
   post '/users/:id/logs/:id/edit', to: 'logs#update'
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :groups
   resources :meals
   resources :foods
-  resources :admin
+  resources :admin, only: [:new, :index]
   resources :mealnames
   resources :quotes
 end

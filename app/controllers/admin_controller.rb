@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :authorize_admin, except: [:user_cancellation, :quotes]
+  before_filter :authorize_admin, except: [:user_cancellation, :quotes, :group_update, :export_users_data]
 
   def new_user
     @user = User.new
@@ -20,9 +20,9 @@ class AdminController < ApplicationController
     render 'groups/group_update'
   end
 
-  def export_user_data
+  def export_users_data
     @users = User.all
-    render '/admin/export_user_data.csv.erb'
+    render '/admin/export_users_data.csv.erb'
   end
 
   def index
@@ -38,19 +38,6 @@ class AdminController < ApplicationController
 
   def new
     @user = User.new
-  end
-
-  def edit
-
-  end
-
-  def update
-  end
-
-  def create
-  end
-
-  def destroy
   end
 
   private

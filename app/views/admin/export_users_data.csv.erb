@@ -1,3 +1,4 @@
+<% if current_user.admin? %>
 "username", "email", "weight", "diet"
 <% @users.each do |user| %>
 <%= raw "\"#{user.username}\"" %>,<%= raw "\"#{user.email}\"" %>,<%= raw "\"#{user.weight}\"" %>,<%= raw "\"#{user.diet.name}\"" %>
@@ -11,6 +12,6 @@
 <% user.logs.each do |log| %>
 <%= raw "\"#{log.date}\"" %>,<%= raw "\"#{log.note}\"" %>
 <% end %>
-
 ----------------------------------------------------------------------------------------------------
+<% end %>
 <% end %>
