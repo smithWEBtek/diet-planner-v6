@@ -3,12 +3,12 @@ class QuotesController < ApplicationController
 
     def random_quotes
       Quote.build_random_quotes
-      redirect_to quotes_path
+      redirect_to root_path
     end
 
     def clear_quotes
-      Quote.all.each {|q|q.delete}
-      redirect_to quotes_path
+      Quote.clear_quotes
+      redirect_to root_path
     end
 
     def new
@@ -23,7 +23,8 @@ class QuotesController < ApplicationController
     end
 
     def create
-      @quote = Quote.new(quote_params)
+      @quote = Quote.build_quote_params(params)
+      # @quote = Quote.new(quote_params)
       if @quote.save
         flash[:notice] = "Quote saved."
         redirect_to quotes_path
@@ -62,6 +63,6 @@ class QuotesController < ApplicationController
       end
 
       def quote_params
-        params.require(:quote).permit(:phrase_id, :celeb_id, :verb_id, :adj_id, :food_id, :diet_id)
+        params.require(:quote).permit(:celeb_id, :verb_id, :adj_id, :food_id, :diet_id, :phrase_id, new_phrase_attributes: [:new_phrase])
       end
   end

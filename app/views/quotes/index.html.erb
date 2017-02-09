@@ -1,9 +1,15 @@
 <h3>Celebrity Quotes</h3>
-<%= link_to "New Quote", new_quote_path %>
-|
-<%= link_to "Generate Random Quotes", random_quotes_path %>
-|
-<%= link_to "Clear Quotes", clear_quotes_path %>
+<h4>
+  <button>
+    <%= link_to "New Quote", new_quote_path %>
+  </button>
+  <button>
+    <%= link_to "Generate Random Quotes", random_quotes_path %>
+  </button>
+  <button>
+    <%= link_to "Clear Quotes", clear_quotes_path %>
+  </button>
+</h4>
 <div class='index_view'>
 
   <table>
@@ -13,6 +19,7 @@
       <th>ID</th>
       <th>Celeb</th>
       <th>Verb</th>
+      <th>Adj</th>
       <th>Food</th>
       <th>Phrase</th>
       <th>Diet</th>
@@ -24,6 +31,7 @@
       <td><%= quote.id %></td>
       <td><%= quote.celeb.name %></td>
       <td><%= quote.verb.name %></td>
+      <td><%= quote.adj.name %></td>
       <td><%= quote.food.name %></td>
       <td><%= quote.phrase.content %></td>
       <td><%= link_to quote.diet.name, diet_path(quote.diet) %></td>

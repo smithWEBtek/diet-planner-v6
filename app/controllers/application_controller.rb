@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     # @meals = Meal.all #see meals_controller#index for custom @meals definition
     @logs = Log.all.order('user.username')
     @mealnames = Mealname.all.order('name')
+    @quotes = Quote.all
   end
 
   def load_diet_stats

@@ -1,15 +1,26 @@
 <div class="index_view">
-  <h1>Welcome to DietPlanner!</h1>
+  <h1>Welcome to Diet-Tracker!</h1>
 
-  <h3>
-    <p>Your foods, calories, meals, diets, ups and downs in a suppportive volunteer community.</p>
-  </h3><br><br><br>
+  <h3>Your foods, calories, meals, diets, ups and downs in a suppportive volunteer community.
+  </h3>
 
-  <p>"Man who stand on mountain, with mouth open, waiting for Roast Duck to fly in...have very long wait."
-    <i><br>-- Confucius</i>
-  </p>
-
-  <p>“That which is measured, improves”
-    <i><br>-- Mom</i>
-  </p>
 </div>
+<p>"Man who stand on mountain, with mouth open, waiting for Roast Duck to fly in...have very long wait."
+  <i><br>-- Confucius</i>
+</p>
+
+<p>“That which is measured, improves”
+  <i><br>-- Mom</i>
+</p>
+<hr>
+</div>
+<div class="registration_bar">
+<h3>Celebrity Quotes</h3>
+<%= link_to "New Quote", new_quote_path %>
+|
+<%= link_to "Generate Random Quotes", random_quotes_path %>
+|
+<%= link_to "Clear Quotes", clear_quotes_path %><br><br>
+
+<%= render partial: 'quotes/quotes', locals: { quotes: @quotes } %>
+<div>

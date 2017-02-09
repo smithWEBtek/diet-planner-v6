@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/welcome/goodbye', to: 'admin#user_cancellation'
   get '/random_quotes', to: 'quotes#random_quotes'
   get '/group_update', to: 'admin#group_update'
+  get '/clear_quotes', to: 'quotes#clear_quotes'
+
 
   post '/users/:id/logs/new', to: 'logs#create'
   post '/users/:id/logs/:id/edit', to: 'logs#update'
