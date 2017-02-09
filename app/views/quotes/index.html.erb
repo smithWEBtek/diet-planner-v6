@@ -1,44 +1,6 @@
 <h3>Celebrity Quotes</h3>
-<h4>
-  <button>
-    <%= link_to "New Quote", new_quote_path %>
-  </button>
-  <button>
-    <%= link_to "Generate Random Quotes", random_quotes_path %>
-  </button>
-  <button>
-    <%= link_to "Clear Quotes", clear_quotes_path %>
-  </button>
-</h4>
-<div class='index_view'>
-
-  <table>
-    <tr align="left">
-      <th>Edit</th>
-      <th>Delete</th>
-      <th>ID</th>
-      <th>Celeb</th>
-      <th>Verb</th>
-      <th>Adj</th>
-      <th>Food</th>
-      <th>Phrase</th>
-      <th>Diet</th>
-    </tr>
-    <% @quotes.each do |quote| %>
-    <tr>
-      <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
-      <td><%= link_to 'Delete', quote_path(quote), :method => :delete, :confirm => 'Are you sure?' %></td>
-      <td><%= quote.id %></td>
-      <td><%= quote.celeb.name %></td>
-      <td><%= quote.verb.name %></td>
-      <td><%= quote.adj.name %></td>
-      <td><%= quote.food.name %></td>
-      <td><%= quote.phrase.content %></td>
-      <td><%= link_to quote.diet.name, diet_path(quote.diet) %></td>
-    </tr>
-    <% end %>
-  </table>
-</div>
-<hr>
-
-<%= render partial: 'quotes/quotes', locals: { quotes: @quotes } %>
+<div class="flash_style">
+  <p>
+    This content is viewable on
+    <%= link_to "Home page", root_path %>
+  </p>

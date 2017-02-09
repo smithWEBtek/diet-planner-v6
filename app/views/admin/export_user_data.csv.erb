@@ -1,0 +1,9 @@
+"username", "email", "weight", "diet"
+<% @users.each do |user| %>
+<%= raw "\"#{user.username}\"" %>,<%= raw "\"#{user.email}\"" %>,<%= raw "\"#{user.weight}\"" %>,<%= raw "\"#{user.diet.name}\"" %>
+"mealname", "food", "qty"
+<% User.first.meals.each do |meal| %>
+<%= raw "\"#{meal.mealname.name}\"" %>,<%= raw "\"#{meal.food.name}\"" %>,<%= raw "\"#{meal.qty}\"" %>
+<% end %>
+--------------------------------------------------
+<% end %>

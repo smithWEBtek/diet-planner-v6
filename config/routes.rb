@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get '/random_quotes', to: 'quotes#random_quotes'
   get '/group_update', to: 'admin#group_update'
   get '/clear_quotes', to: 'quotes#clear_quotes'
+  get '/export_csv', to: 'quotes#export_csv'
+  get '/export_user_csv', to: 'users#export_csv'
+  get '/export_user_data', to: 'admin#export_user_data'
 
 
   post '/users/:id/logs/new', to: 'logs#create'

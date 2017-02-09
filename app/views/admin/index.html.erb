@@ -1,1 +1,10 @@
-<%= render partial: 'users/users', locals: { users: @users } %>
+<div class="index_style">
+  <button>
+    <%= link_to "Export Users Index", export_user_data_path %>
+  </button>
+</div>
+
+<div class="registration_bar">
+  Users Index:
+  <%= render partial: 'users/users', locals: { users: @users } %>
+</div>

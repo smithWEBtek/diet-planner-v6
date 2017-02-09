@@ -20,6 +20,11 @@ class AdminController < ApplicationController
     render 'groups/group_update'
   end
 
+  def export_user_data
+    @users = User.all
+    render '/admin/export_user_data.csv.erb'
+  end
+
   def index
     @users = User.all
     @logs = Log.all

@@ -17,6 +17,9 @@
   <%= link_to 'Edit Account', edit_user_path(@user) %>
   |
   <%= link_to 'Cancel Account', welcome_goodbye_path, :confirm => 'Are you sure?' %>
+  <button>
+    <%= link_to 'Export My Data', export_user_csv_path %>
+  </button>
 </div>
 <div>
   <hr>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
-  before_action :set_user, only: [:show, :edit, :destroy]
+  before_action :set_user, only: [:show, :edit, :destroy, :export_csv]
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
   before_action :load_models
 
@@ -9,6 +9,10 @@ class UsersController < ApplicationController
   end
 
   def index
+  end
+
+  def export_csv
+    render '/users/user_data.csv.erb'
   end
 
   def show

@@ -17,6 +17,16 @@ class QuotesController < ApplicationController
 
     def index
       @quotes = Quote.all
+      respond_to do |format|
+        format.html #index.html.erb
+        format.json { render json: @quotes }
+        format.csv
+      end
+    end
+
+    def export_csv
+      @quotes = Quote.all
+      render '/quotes/index.csv.erb'
     end
 
     def show
@@ -27,7 +37,7 @@ class QuotesController < ApplicationController
       # @quote = Quote.new(quote_params)
       if @quote.save
         flash[:notice] = "Quote saved."
-        redirect_to quotes_path
+        redirect_to root_path
       else
         render :new
       end
@@ -41,7 +51,7 @@ class QuotesController < ApplicationController
       @quote.update(quote_params)
       if @quote.save
         flash[:notice] = "Quote updated."
-        redirect_to quote_path(@quote)
+        redirect_to root_path
       else
         redirect_to new_quote_path
       end
