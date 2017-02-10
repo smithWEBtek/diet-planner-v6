@@ -36,10 +36,6 @@ class AdminController < ApplicationController
     render 'admin/index'
   end
 
-  def new
-    @user = User.new
-  end
-
   private
     def authorize_admin
       return unless !current_user.admin?
