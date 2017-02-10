@@ -13,7 +13,6 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 </div>
-
 <div class="field<%= ' field_with_errors' if food.errors[:group].any? %>">
   <%= f.label :group %>
   <%= f.collection_select :group_id, groups, :id, :name %>
