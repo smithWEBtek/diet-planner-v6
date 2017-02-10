@@ -64,6 +64,7 @@ class ApplicationController < ActionController::Base
   private
   def after_sign_out_path_for(current_user)
     current_user = nil
+    @user = nil
     root_path
   end
 
