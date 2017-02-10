@@ -14,11 +14,24 @@
   Diet:
   <%= link_to @user.diet.name, diet_path(@user.diet) %><br>
   <% end %>
-  <%= link_to 'Edit Account', edit_user_path(@user) %>
-  |
-  <%= link_to 'Cancel Account', welcome_goodbye_path, :confirm => 'Are you sure?' %>
+
+  <button>
+    <%= link_to "New Log", new_user_log_path(@user) %>
+  </button>
+  <button>
+    <%= link_to "New Meal", new_meal_path %>
+  </button>
+  <button>
+    <%= link_to "New Food", new_food_path %>
+  </button>
+  <button>
+    <%= link_to 'Edit Account', edit_user_path(@user) %>
+  </button>
   <button>
     <%= link_to 'Export My Data', export_user_csv_path %>
+  </button>
+  <button>
+    <%= link_to 'Cancel Account', welcome_goodbye_path, :confirm => 'Are you sure?' %>
   </button>
 </div>
 <div>
@@ -30,17 +43,7 @@
   <a href="#userstats">MyStats</a>
 </div>
 <div>
-  <h4>
-    <button>
-      <%= link_to "New log", new_user_log_path(@user) %>
-    </button>
-    <button>
-      <%= link_to "New meal", new_meal_path %>
-    </button>
-    <button>
-      <%= link_to "New food", new_food_path %>
-    </button>
-  </h4>
+
   <hr>
 
   <h3 id="logs">MyLogs</h3>
