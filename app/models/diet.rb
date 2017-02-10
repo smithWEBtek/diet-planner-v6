@@ -4,7 +4,7 @@ class Diet < ApplicationRecord
   validates :name, format: { with: /\A[A-Z]/, message: 'cannot have leading empty space & must begin with a capital letter' }
 
   def reset_user_diet_id
-    self.users.each do |user|
+    users.each do |user|
       user.diet_id = 1
       user.save
     end

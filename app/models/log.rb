@@ -4,16 +4,14 @@ class Log < ApplicationRecord
   validate :date_validator
 
   def date_validator
-    unless self.date <= Time.zone.now
-      self.errors[:date] << 'cannot be in the future.'
-    end
-  end  
+    errors[:date] << 'cannot be in the future.' unless date <= Time.zone.now
+  end
 
   def total_log_cals
-    self.meals.each do |meal|
-      log_cals.push(meal.qty * meal.food.cals) 
-      log_cals.inject(0) {|sum, x| sum + x}
-     end
+    meals.each do |meal|
+      log_cals.push(meal.qty * meal.food.cals)
+      log_cals.inject(0) { |sum, x| sum + x }
+    end
     log_cals
   end
 end

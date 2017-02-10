@@ -3,5 +3,4 @@ class Food < ApplicationRecord
   belongs_to :group
   validates :name, presence: true, uniqueness: true
   validates :cals, numericality: { greater_than: 0 }
- 
 end

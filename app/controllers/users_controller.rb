@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
-  before_action :set_user, only: [:show, :edit, :destroy, :export_csv]
+  before_action :set_user, only: [:show, :edit, :destroy, :update, :export_csv]
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
-  before_action :load_models
+  before_action :load_models, only: [:index, :edit]
 
   def new
     @user = User.new
   end
 
-  def index
-  end
+  def index; end
 
   def export_csv
     render '/users/user_data.csv.erb'
@@ -18,9 +17,6 @@ class UsersController < ApplicationController
   def show
     @user = current_user unless current_user.admin?
     load_diet_stats
-    # if !current_user
-    #   redirect_to root_path
-    # end
   end
 
   def create
@@ -33,26 +29,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    @user = User.find_by_id(params[:id])
-    if !params[:user][:password].present?
-      flash[:notice] = "Password required for User Edit."
     @user.update(user_params)
     if @user.save
-      flash[:notice] = "User Profile updated."
-      redirect_to user_path(@user)
+      flash[:notice] = 'User Profile updated.'
+      redirect_to user_path(current_user)
     else
       redirect_to user_path(@user)
-    end
     end
   end
 
   def destroy
     if @user.delete
-      flash[:notice] = "User deleted"
+      flash[:notice] = 'User deleted'
       redirect_to root_path
     else
       flash[:notice] = @user.errors.full_messages
@@ -61,11 +52,12 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find_by_id(params[:id])
-    end
 
-    def user_params
-      params.require(:user).permit(:username, :role, :email, :password, :weight, :diet_id, :logs_attributes => [:user_id, :date, :note], :meals_attributes => [:user_id, :mealdate, :mealname_id, :food_id, :new_food, :qty, :note])
-    end
+  def set_user
+    @user = User.find_by_id(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:username, :role, :email, :password, :weight, :diet_id, logs_attributes: [:user_id, :date, :note], meals_attributes: [:user_id, :mealdate, :mealname_id, :food_id, :new_food, :qty, :note])
+  end
 end

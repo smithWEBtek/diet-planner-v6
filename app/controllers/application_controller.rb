@@ -12,14 +12,14 @@ class ApplicationController < ActionController::Base
   end
 
   def load_models
-    @groups = Group.all.order('name')
-    @foods = Food.all.order('name')
-    @diets = Diet.all#.order('name')
-    @users = User.all.order('username')
+    @groups ||= Group.all.order('name')
+    @foods ||= Food.all.order('id')
+    @diets ||= Diet.all#.order('name')
+    @users ||= User.all.order('username')
     # @meals = Meal.all #see meals_controller#index for custom @meals definition
-    @logs = Log.all.order('user.username')
-    @mealnames = Mealname.all.order('name')
-    @quotes = Quote.all
+    @logs ||= Log.all.order('user.username')
+    @mealnames ||= Mealname.all.order('name')
+    @quotes ||= Quote.all
   end
 
   def load_diet_stats
@@ -59,7 +59,6 @@ class ApplicationController < ActionController::Base
       end
     end
     @user_foods
-    binding.pry
   end
 
   private

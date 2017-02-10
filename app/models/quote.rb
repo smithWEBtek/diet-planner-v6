@@ -8,17 +8,17 @@ class Quote < ApplicationRecord
   validates :celeb_id, :verb_id, :adj_id, :food_id, :diet_id, :phrase_id, presence: true
 
   def random_quotes
-    self.build_random_quotes
+    build_random_quotes
   end
 
   def self.build_random_quotes
     5.times do
       @quote = Quote.new
-      @quote.celeb = Celeb.find(rand(1.."#{Celeb.all.count}".to_i))
-      @quote.verb = Verb.find(rand(1.."#{Verb.all.count}".to_i))
-      @quote.adj = Adj.find(rand(1.."#{Adj.all.count}".to_i))
-      @quote.food = Food.find(rand(1.."#{Food.all.count}".to_i))
-      @quote.phrase = Phrase.find(rand(1.."#{Phrase.all.count}".to_i))
+      @quote.celeb = Celeb.find(rand(1..Celeb.all.count.to_s.to_i))
+      @quote.verb = Verb.find(rand(1..Verb.all.count.to_s.to_i))
+      @quote.adj = Adj.find(rand(1..Adj.all.count.to_s.to_i))
+      @quote.food = Food.find(rand(1..Food.all.count.to_s.to_i))
+      @quote.phrase = Phrase.find(rand(1..Phrase.all.count.to_s.to_i))
       @quote.diet = Diet.find(rand(2..9))
       @quote.save
     end
@@ -31,15 +31,15 @@ class Quote < ApplicationRecord
 
   def self.build_quote_params(params)
     @celeb = Celeb.find_or_create_by(name: params[:quote][:celeb])
-      @celeb.save
+    @celeb.save
     @verb = Verb.find_or_create_by(name: params[:quote][:verb])
-      @verb.save
+    @verb.save
     @adj = Adj.find_or_create_by(name: params[:quote][:adj])
-      @adj.save
+    @adj.save
     @food = Food.find_or_create_by(name: params[:quote][:food])
-      @food.save
+    @food.save
     @phrase = Phrase.find_or_create_by(content: params[:quote][:phrase])
-      @phrase.save
+    @phrase.save
 
     @quote = Quote.create(
       celeb_id: @celeb.id,
@@ -55,5 +55,4 @@ class Quote < ApplicationRecord
   def self.clear_quotes
     Quote.destroy_all
   end
-
 end
