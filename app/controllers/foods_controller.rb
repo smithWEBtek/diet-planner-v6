@@ -32,7 +32,7 @@ class FoodsController < ApplicationController
       flash[:notice] = "Food updated."
       redirect_to food_path(@food)
     else
-      render :new
+      render :edit
     end
   end
 
@@ -41,14 +41,14 @@ class FoodsController < ApplicationController
       Meal.reset_meal_food_ids
       flash[:notice] = "Food deleted"
       redirect_to foods_path
-    else 
+    else
       flash[:notice] = @food.errors.full_messages
       redirect_to food_path(@food)
     end
   end
 
   private
-    def set_food 
+    def set_food
       @food = Food.find_by_id(params[:id])
     end
 
