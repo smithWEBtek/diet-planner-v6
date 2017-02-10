@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
-  before_action :set_user, only: [:show, :edit, :destroy, :update, :export_csv]
+  before_action :set_user, only: [ :export_csv, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
-  before_action :load_models, only: [:index, :edit]
+  before_action :load_models
 
   def new
     @user = User.new
+    authorize_admin
   end
-
-  def index; end
 
   def export_csv
     render '/users/user_data.csv.erb'
@@ -20,6 +19,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = User.create(user_params)
     if @user.save
       flash[:notice] = "Welcome, #{@user.username.upcase}! you have successfully signed up, please SIGN IN."
@@ -29,15 +29,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @user
+  end
 
   def update
     @user.update(user_params)
-    if @user.save
-      flash[:notice] = 'User Profile updated.'
-      redirect_to user_path(current_user)
+     if @user.save
+      flash[:notice] = 'User Account updated.'
+      render :show
     else
-      redirect_to user_path(@user)
+      render :edit
     end
   end
 
@@ -52,12 +54,13 @@ class UsersController < ApplicationController
   end
 
   private
-
   def set_user
     @user = User.find_by_id(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:username, :role, :email, :password, :weight, :diet_id, logs_attributes: [:user_id, :date, :note], meals_attributes: [:user_id, :mealdate, :mealname_id, :food_id, :new_food, :qty, :note])
+    params.require(:user).permit(:username, :role, :email, :password, :weight, :diet_id,
+      logs_attributes: [:user_id, :date, :note],
+      meals_attributes: [:user_id, :mealdate, :mealname_id, :food_id, :new_food, :qty, :note])
   end
 end

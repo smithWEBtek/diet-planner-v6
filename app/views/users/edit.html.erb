@@ -1,47 +1,5 @@
-<h1>User Edit Page</h1>
+<h3>Edit User</h3>
 
-<%= form_for @user do |f| %>
-
-<% if f.object.errors.any? %>
-<div id="error_explanation" class="flash_style">
-  <h2>There were some errors:</h2>
-  <ul>
-    <% f.object.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-  <% end %>
+<div class='index_view'>
+  <%= render partial: 'form', locals: { user: @user } %>
 </div>
-
-<p>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-</p>
-<p>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-</p>
-<div class="field<%#= '_with_errors' if f.object.errors[:password].any? %>">
-  <%= f.label :password %>(required)
-  <%= f.password_field :password %>
-</div>
-<p>
-  <%= f.label :weight %>
-  <%= f.text_field :weight %>
-</p>
-<p>
-  <%= f.label :diet %>
-  <%= f.collection_select :diet_id, @diets, :id, :name %>
-</p>
-<% if current_user.admin? %>
-<p>
-  <%= f.radio_button(:role, "standard") %>
-  <%= f.label(:role_standard, "standard") %>
-
-  <%= f.radio_button(:role, "admin") %>
-  <%= f.label(:role_standard, "admin") %>
-</p>
-<% end %>
-<%= f.submit %>
-
-<% end %>
