@@ -3,12 +3,12 @@ class LogsController < ApplicationController
 
   def new
     @log = current_user.logs.build
-  end 
+  end
 
   def index
     if current_user && current_user.admin?
       @user = current_user
-      @meals = Meal.all 
+      @meals = Meal.all
       @logs = Log.all
     else
       @user = current_user
@@ -17,13 +17,13 @@ class LogsController < ApplicationController
     end
   end
 
-  def show 
+  def show
   end
 
   def create
     @log = current_user.logs.new(log_params)
     if @log.save
-      flash[:success] = "New log created." 
+      flash[:success] = "New log created."
       redirect_to user_logs_path(@log.user)
     else
       render :new
@@ -47,18 +47,18 @@ class LogsController < ApplicationController
     if @log.delete
       flash[:notice] = "Log deleted"
       redirect_to user_logs_path(current_user)
-    else 
+    else
       flash[:notice] = "Log NOT deleted"
       redirect_to user_logs_path(current_user)
     end
   end
 
-  private 
+  private
     def set_log
       @log = Log.find_by_id(params[:id])
     end
 
     def log_params
-      params.require(:log).permit(:note, :date)    
+      params.require(:log).permit(:note, :date)
     end
 end
