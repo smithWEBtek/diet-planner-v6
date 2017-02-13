@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def load_models
     @groups ||= Group.all.order('name')
     @foods ||= Food.all.order('id')
-    @diets ||= Diet.all#.order('name')
+    @diets ||= Diet.all
     @users ||= User.all.order('username')
     # @meals = Meal.all #see meals_controller#index for custom @meals definition
     @logs ||= Log.all.order('user.username')
