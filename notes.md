@@ -1,4 +1,46 @@
 notes: rails portfolio project: diet-planner
+
+
+170213
+Rails assessment notes: 
+
+  Monday, February 13, 2017
+  8:51 AM
+
+  Questions: 
+    1. User update account, logs out.
+    2. User edit form, error code made it hang indefinitely.
+
+ToDo before next mtg: 
+  Install instructions
+  License file, MIT open source
+  Contributors Guide
+  More commits
+
+
+  Add nested Log form to Edit User Page:
+  http://stackoverflow.com/questions/39628394/custom-attribute-setter-method-in-nested-forms
+
+  Read Rubber Duck article(s): 
+  https://en.wikipedia.org/wiki/Rubber_duck_debugging
+
+At next mtg: 
+
+Refactor Feature:
+  1. Issue with User Edit form, logging out after updating User
+    a. Had to remove the Error Handling code, to get it 'working'
+    b. Currently, after a User edits and saves:
+      i. Flash message shows update successful
+      ii. User show page doesn't refresh
+      iii. If you refresh, it signs you out and you have to log back in.
+  2. Something sexier with scoped resource(s)
+
+  Pair coding:  demo in console
+    User.first.meals.build
+    User.last.logs.build
+
+
+
 170208
 
 change title to diet-tracker
