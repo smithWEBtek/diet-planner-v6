@@ -37,10 +37,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_params)
+    @user.update_without_password(user_params)
     if @user.save
       flash[:notice] = 'User Account updated.'
-      # render :show
       redirect_to user_path(@user)
     else
       render :edit
