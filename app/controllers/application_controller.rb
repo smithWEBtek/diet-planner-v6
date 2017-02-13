@@ -1,23 +1,27 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :user_signed_in?, :admin?, :after_sign_out_path_for
+  helper_method :user_signed_in?, :admin?
+  
   def self.user_signed_in?
     !!current_user
   end
+  
   def authorize_admin
     return unless !current_user.admin?
     redirect_to root_path, alert: 'Admins only, you have been redirected to HOME page.'
   end
+  
   def load_models
     @groups ||= Group.all.order('name')
     @foods ||= Food.all.order('id')
     @diets ||= Diet.all
     @users ||= User.all.order('username')
-    # @meals = Meal.all #see meals_controller#index for custom @meals definition
+    # @meals = Meal.all #see meals_controller#index for custom @meals 
     @logs ||= Log.all.order('user.username')
     @mealnames ||= Mealname.all.order('name')
     @quotes ||= Quote.all
   end
+  
   def load_diet_stats
     @vegans_cals = User.group_cals(User.vegans)
     @balancers_cals = User.group_cals(User.balancers)
@@ -44,6 +48,7 @@ class ApplicationController < ActionController::Base
     @vampires_avg_cals_per_meal = User.avg_cals_per_meal(User.vampires)
     @junkers_avg_cals_per_meal = User.avg_cals_per_meal(User.junkers)
   end
+  
   def load_user_foods
     @user_foods = []
     Food.all.each do |food|
@@ -52,14 +57,5 @@ class ApplicationController < ActionController::Base
       end
     end
     @user_foods
-  end
-  private
-  def after_sign_out_path_for(current_user)
-    current_user = nil
-    @user = nil
-    root_path
-  end
-  def admin?
-    !!self.role == "admin"
   end
 end
