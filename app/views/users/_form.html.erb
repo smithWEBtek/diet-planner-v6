@@ -17,13 +17,20 @@
 
   <!--add in a nested log form -->
   <hr>
-  <p>Add a log note (optional): </p>
-    <%= f.fields_for @user.logs.build do |log| %>
-      <% if !log.object.id.present? %>
-        <%= render partial: 'logs/form', locals: { log: log } %>
-      <% end %>
+  <p>Add a log note (optional):
+  </p>
+  <p>
+    <!-- <%#= f.fields_for @user.logs.build do |log| %>  from stack overflow example-->
+    <%= f.fields_for :logs do |log| %>
+    <% if !log.object.id.present? %>
+    <%= log.label :date %>
+    <%= log.date_select :date %><br>
+    <%= log.label :note %>
+    <%= log.text_area :note %><br>
+    <% end %>
     <% end %>
   </p>
+
   <% if current_user.admin? %>
   <%= f.radio_button(:role, "standard") %>
   <%= f.label(:role_standard, "standard") %>

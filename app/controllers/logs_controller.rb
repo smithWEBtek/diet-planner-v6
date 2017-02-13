@@ -21,8 +21,6 @@ class LogsController < ApplicationController
   end
 
   def create
-    binding.pry
-
     @log = current_user.logs.new(log_params)
     if @log.save
       flash[:success] = 'New log created.'

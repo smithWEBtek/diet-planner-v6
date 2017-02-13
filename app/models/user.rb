@@ -3,8 +3,8 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook]
+  :recoverable, :rememberable, :trackable, :validatable,
+  :omniauthable, omniauth_providers: [:facebook]
 
   has_many :meals
   has_many :foods, through: :meals
