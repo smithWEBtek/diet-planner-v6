@@ -58,5 +58,5 @@
 
   <h3 id="userstats">MyStats</h3>
   <a href="#top">^top</a><br><br>
-  <%= render partial: 'users/userstats', locals: { user: @user} %>
+  <%= render partial: 'users/userstats', locals: { user: @user, meals_count: @meals_count, user_cals: @user_cals, user_avg_cals_per_meal: @user_avg_cals_per_meal } %>
   <hr>
