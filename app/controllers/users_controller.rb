@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
   before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show]
   before_action :load_models
 
   def new
@@ -40,7 +40,8 @@ class UsersController < ApplicationController
     @user.update(user_params)
     if @user.save
       flash[:notice] = 'User Account updated.'
-      render :show
+      # render :show
+      redirect_to user_path(@user)
     else
       render :edit
     end
@@ -64,7 +65,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :role, :email, :password, :weight, :diet_id,
-                                 logs_attributes: [:user_id, :date, :note],
-                                 meals_attributes: [:user_id, :mealdate, :mealname_id, :food_id, :new_food, :qty, :note])
+      logs_attributes: [:user_id, :date, :note],
+    meals_attributes: [:user_id, :mealdate, :mealname_id, :food_id, :new_food, :qty, :note])
   end
 end

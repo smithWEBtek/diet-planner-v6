@@ -1,0 +1,38 @@
+<h1>Quotes#new</h1>
+
+<%= form_for :quote do |f| %>
+
+<% if f.object.errors.any? %>
+<div id="error_explanation" class="flash_style">
+  <h2>There were some errors:</h2>
+  <ul>
+    <% f.object.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+
+<!-- <div class="field<%#= '_with_errors' if f.object.errors[:food].any? %>"> -->
+<%= f.label :celeb %>
+<%= f.collection_select :celeb_id, Celeb.all, :id, :name %>
+<!-- </div> -->
+<!-- <div class="field<%#= '_with_errors' if f.object.errors[:food].any? %>"> -->
+<%= f.label :verb %>
+<%= f.collection_select :verb_id, Verb.all, :id, :name %>
+<!-- </div> -->
+<!-- <div class="field<%#= '_with_errors' if f.object.errors[:food].any? %>"> -->
+<%= f.label :adj %>
+<%= f.collection_select :adj_id, Adj.all, :id, :name %>
+<!-- </div> -->
+<!-- <div class="field<%#= '_with_errors' if f.object.errors[:food].any? %>"> -->
+<%= f.label :food %>
+<%= f.collection_select :food_id, Food.all, :id, :name %>
+<!-- </div> -->
+<!-- <div class="field<%#= '_with_errors' if f.object.errors[:food].any? %>"> -->
+<%= f.label :phrase %>
+<%= f.collection_select :phrase_id, Phrase.all, :id, :content %>
+<!-- </div> -->
+
+<% end %>
+<%= f.submit %>
+<% end %>
