@@ -1,0 +1,398 @@
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateDiets (20170113211543)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "diets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170113211543"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateMeals (20170113233356)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "meals" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mealdate" date, "mealname_id" integer, "user_id" integer, "food_id" integer, "new_food" varchar DEFAULT '', "qty" integer DEFAULT 1, "note" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170113233356"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateFoods (20170114001049)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "foods" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "group_id" integer DEFAULT 1, "cals" integer DEFAULT 1, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170114001049"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateGroups (20170117112533)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170117112533"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to DeviseCreateUsers (20170118002449)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "weight" integer DEFAULT 500, "diet_id" integer DEFAULT 1, "image" varchar, "role" integer DEFAULT 0, "email" varchar, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "confirmation_token" varchar, "confirmed_at" datetime, "confirmation_sent_at" datetime, "unconfirmed_email" varchar, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" varchar, "locked_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170118002449"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddOmniauthToUsers (20170118205926)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" varchar[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" varchar[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170118205926"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateLogs (20170126170210)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "note" text, "date" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170126170210"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateMealnames (20170128150336)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "mealnames" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170128150336"]]
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateQuotes (20170208011611)
+  [1m[35m (1.8ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "quotes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "phrase_id" integer, "celeb_id" integer, "verb_id" integer, "food_id" integer, "adj_id" integer, "diet_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170208011611"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCelebs (20170208011619)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "celebs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170208011619"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateVerbs (20170208011652)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "verbs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170208011652"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateAdjs (20170208022932)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "adjs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170208022932"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePhrases (20170208122844)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "phrases" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170208122844"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", 2017-02-13 18:07:06 UTC], ["updated_at", 2017-02-13 18:07:06 UTC]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.6ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:07:11.852177', '2017-02-13 18:07:11.852177', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:07:11.852177', '2017-02-13 18:07:11.852177', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.856869', '2017-02-13 18:07:11.856869', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.856869', '2017-02-13 18:07:11.856869', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:07:11.858547', '2017-02-13 18:07:11.858547', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:07:11.858547', '2017-02-13 18:07:11.858547', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.860469', '2017-02-13 18:07:11.860469', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.860469', '2017-02-13 18:07:11.860469', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.862210', '2017-02-13 18:07:11.862210', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.862210', '2017-02-13 18:07:11.862210', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.865260', '2017-02-13 18:07:11.865260', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.865260', '2017-02-13 18:07:11.865260', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.867619', '2017-02-13 18:07:11.867619', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:07:11.867619', '2017-02-13 18:07:11.867619', 298486374)[0m
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+-------------------------------------------
+QuotesControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------
+QuotesControllerTest: test_should_get_destroy
+---------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------
+QuotesControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+QuotesControllerTest: test_should_get_create
+--------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+QuotesControllerTest: test_should_get_update
+--------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------
+QuotesControllerTest: test_should_get_show
+------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------
+QuotesControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------
+MealnamesControllerTest: test_should_get_update
+-----------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+---------------------------------------------
+MealnamesControllerTest: test_should_get_edit
+---------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+----------------------------------------------
+MealnamesControllerTest: test_should_get_index
+----------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+-----------------------------------------------
+MealnamesControllerTest: test_should_get_create
+-----------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+------------------------------------------------
+MealnamesControllerTest: test_should_get_destroy
+------------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------------------
+MealnamesControllerTest: test_should_get_new
+--------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:08:14.137929', '2017-02-13 18:08:14.137929', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:08:14.137929', '2017-02-13 18:08:14.137929', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.142202', '2017-02-13 18:08:14.142202', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.142202', '2017-02-13 18:08:14.142202', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:08:14.143844', '2017-02-13 18:08:14.143844', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:08:14.143844', '2017-02-13 18:08:14.143844', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.145137', '2017-02-13 18:08:14.145137', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.145137', '2017-02-13 18:08:14.145137', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.146575', '2017-02-13 18:08:14.146575', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.146575', '2017-02-13 18:08:14.146575', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.149692', '2017-02-13 18:08:14.149692', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.149692', '2017-02-13 18:08:14.149692', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.153654', '2017-02-13 18:08:14.153654', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:08:14.153654', '2017-02-13 18:08:14.153654', 298486374)[0m
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:09:09.292590', '2017-02-13 18:09:09.292590', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:09:09.292590', '2017-02-13 18:09:09.292590', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.297081', '2017-02-13 18:09:09.297081', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.297081', '2017-02-13 18:09:09.297081', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:09:09.299035', '2017-02-13 18:09:09.299035', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:09:09.299035', '2017-02-13 18:09:09.299035', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.300562', '2017-02-13 18:09:09.300562', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.300562', '2017-02-13 18:09:09.300562', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.302326', '2017-02-13 18:09:09.302326', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.302326', '2017-02-13 18:09:09.302326', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.307017', '2017-02-13 18:09:09.307017', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.307017', '2017-02-13 18:09:09.307017', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.310365', '2017-02-13 18:09:09.310365', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:09:09.310365', '2017-02-13 18:09:09.310365', 298486374)[0m
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:10:22.716203', '2017-02-13 18:10:22.716203', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:10:22.716203', '2017-02-13 18:10:22.716203', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.722253', '2017-02-13 18:10:22.722253', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.722253', '2017-02-13 18:10:22.722253', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:10:22.724961', '2017-02-13 18:10:22.724961', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:10:22.724961', '2017-02-13 18:10:22.724961', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.727914', '2017-02-13 18:10:22.727914', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.727914', '2017-02-13 18:10:22.727914', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.732806', '2017-02-13 18:10:22.732806', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.732806', '2017-02-13 18:10:22.732806', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.735274', '2017-02-13 18:10:22.735274', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.735274', '2017-02-13 18:10:22.735274', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.737235', '2017-02-13 18:10:22.737235', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:10:22.737235', '2017-02-13 18:10:22.737235', 298486374)[0m
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (1.4ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:15.550204', '2017-02-13 18:11:15.550204', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:15.550204', '2017-02-13 18:11:15.550204', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.555726', '2017-02-13 18:11:15.555726', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.555726', '2017-02-13 18:11:15.555726', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:15.557256', '2017-02-13 18:11:15.557256', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:15.557256', '2017-02-13 18:11:15.557256', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.558679', '2017-02-13 18:11:15.558679', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.558679', '2017-02-13 18:11:15.558679', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.560104', '2017-02-13 18:11:15.560104', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.560104', '2017-02-13 18:11:15.560104', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.562795', '2017-02-13 18:11:15.562795', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.562795', '2017-02-13 18:11:15.562795', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.565744', '2017-02-13 18:11:15.565744', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:15.565744', '2017-02-13 18:11:15.565744', 298486374)[0m
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:44.041179', '2017-02-13 18:11:44.041179', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:44.041179', '2017-02-13 18:11:44.041179', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.045323', '2017-02-13 18:11:44.045323', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.045323', '2017-02-13 18:11:44.045323', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:44.046823', '2017-02-13 18:11:44.046823', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:11:44.046823', '2017-02-13 18:11:44.046823', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.048315', '2017-02-13 18:11:44.048315', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.048315', '2017-02-13 18:11:44.048315', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.049865', '2017-02-13 18:11:44.049865', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.049865', '2017-02-13 18:11:44.049865', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.051595', '2017-02-13 18:11:44.051595', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.051595', '2017-02-13 18:11:44.051595', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.053300', '2017-02-13 18:11:44.053300', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:11:44.053300', '2017-02-13 18:11:44.053300', 298486374)[0m
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:12:09.048046', '2017-02-13 18:12:09.048046', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:12:09.048046', '2017-02-13 18:12:09.048046', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.052465', '2017-02-13 18:12:09.052465', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.052465', '2017-02-13 18:12:09.052465', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:12:09.054178', '2017-02-13 18:12:09.054178', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:12:09.054178', '2017-02-13 18:12:09.054178', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.055421', '2017-02-13 18:12:09.055421', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.055421', '2017-02-13 18:12:09.055421', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.056795', '2017-02-13 18:12:09.056795', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.056795', '2017-02-13 18:12:09.056795', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.058410', '2017-02-13 18:12:09.058410', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.058410', '2017-02-13 18:12:09.058410', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.060988', '2017-02-13 18:12:09.060988', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:12:09.060988', '2017-02-13 18:12:09.060988', 298486374)[0m
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "diets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:13:02.159585', '2017-02-13 18:13:02.159585', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "diets" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:13:02.159585', '2017-02-13 18:13:02.159585', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "foods"[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.165372', '2017-02-13 18:13:02.165372', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "foods" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.165372', '2017-02-13 18:13:02.165372', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "groups"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:13:02.167110', '2017-02-13 18:13:02.167110', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "groups" ("name", "created_at", "updated_at", "id") VALUES ('MyString', '2017-02-13 18:13:02.167110', '2017-02-13 18:13:02.167110', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "logs"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.168545', '2017-02-13 18:13:02.168545', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "logs" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.168545', '2017-02-13 18:13:02.168545', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "meals"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.170578', '2017-02-13 18:13:02.170578', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "meals" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.170578', '2017-02-13 18:13:02.170578', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "phrases"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.175257', '2017-02-13 18:13:02.175257', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "phrases" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.175257', '2017-02-13 18:13:02.175257', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.177851', '2017-02-13 18:13:02.177851', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-02-13 18:13:02.177851', '2017-02-13 18:13:02.177851', 298486374)[0m
+  [1m[35m (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+--------------------------------
+UserTest: test_meals_attributes=
+--------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
