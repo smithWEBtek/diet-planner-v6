@@ -14,18 +14,21 @@
 
   <%= f.label :diet %>
   <%= f.collection_select :diet_id, @diets, :id, :name %><br>
+
   <!--add in a nested log form -->
   <hr>
   <p>Add a log note (optional): </p>
-    <%= f.fields_for current_user.logs.build do |log_builder| %>
-      <%= log_builder.label :date %><br>
-      <%= log_builder.date_field :date %><br>
+    <%= f.fields_for :logs do |l| %>
+    <% if !l.object.id.present? %>
+      <%= l.label :date %><br>
+      <%= l.date_field :date %><br>
 
-      <%= log_builder.label :note %>
-      <%= log_builder.text_area :note %>
-  </p>
+      <%= l.label :note %>
+      <%= l.text_area :note %>
+
     <% end %>
-
+ <% end %>
+   </p>
   <% if current_user.admin? %>
   <%= f.radio_button(:role, "standard") %>
   <%= f.label(:role_standard, "standard") %>

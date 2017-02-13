@@ -2,6 +2,7 @@ class LogsController < ApplicationController
   before_action :set_log, only: [:show, :edit, :destroy]
 
   def new
+    binding.pry
     @log = current_user.logs.build
   end
 

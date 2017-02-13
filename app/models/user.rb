@@ -78,8 +78,6 @@ class User < ApplicationRecord
   end
 
   def meals_attributes=(meals_attributes)
-binding.pry
-
     meals_attributes.each do |_i, meal_attributes|
       if meal_attributes[:food_id].present?
         meals.create(meal_attributes)

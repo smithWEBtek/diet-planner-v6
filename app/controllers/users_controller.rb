@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   def create
-binding.pry
     @user = User.create(user_params)
     if @user.save
       flash[:notice] = "Welcome, #{@user.username.upcase}! you have successfully signed up, please SIGN IN."
@@ -34,9 +33,11 @@ binding.pry
 
   def edit
     @user
+    @log = @user.logs.build
   end
 
   def update
+binding.pry
     @user.update(user_params)
     if @user.save
       flash[:notice] = 'User Account updated.'
