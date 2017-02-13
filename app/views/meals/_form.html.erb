@@ -18,7 +18,7 @@
         <%= meal_builder.date_select :mealdate %><br>
       <div class="field<%= '_with_errors' if meal_builder.object.errors[:food].any? %>">
         <%= meal_builder.label :food %>
-        <%= meal_builder.collection_select :food_id, @foods, :id, :name, include_blank: true %><br>
+        <%= meal_builder.collection_select :food_id, foods, :id, :name, include_blank: true %><br>
       </div>
       <div class="field<%= '_with_errors' if meal_builder.object.errors[:new_food].any? %>">
         <%= meal_builder.label :new_food %>
