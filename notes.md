@@ -12,14 +12,12 @@ Rails assessment notes:
     2. User edit form, error code made it hang indefinitely.
 
 ToDo before next mtg: 
-  Install instructions
-  License file, MIT open source
-  Contributors Guide
-  More commits
-
-
-  Add nested Log form to Edit User Page:
-  http://stackoverflow.com/questions/39628394/custom-attribute-setter-method-in-nested-forms
+-[] Install instructions
+-[] License file, MIT open source
+-[] Contributors Guide
+-[] More commits
+-[] Add nested Log form to Edit User Page:
+    http://stackoverflow.com/questions/39628394/custom-attribute-setter-method-in-nested-forms
 
   Read Rubber Duck article(s): 
   https://en.wikipedia.org/wiki/Rubber_duck_debugging
@@ -34,6 +32,13 @@ Refactor Feature:
       ii. User show page doesn't refresh
       iii. If you refresh, it signs you out and you have to log back in.
   2. Something sexier with scoped resource(s)
+
+  3. User show page, download stats
+    a. Elaborate in that report, currently only shows User name, email, diet & weight
+    b. Copy the Admin report that has User data, User meals and User logs
+    c. Redirect after download, because any button you hit, downloads same data again: 
+      -URL remains this after download: http://localhost:3000/export_user_csv
+
 
   Pair coding:  demo in console
     User.first.meals.build

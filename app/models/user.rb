@@ -94,8 +94,6 @@ class User < ApplicationRecord
   end
 
   def logs_attributes=(logs_attributes)
-binding.pry
-
     logs_attributes.values.each do |log_attributes|
       self.logs.build(log_attributes)
     end

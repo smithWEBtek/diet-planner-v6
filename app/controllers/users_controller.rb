@@ -37,14 +37,13 @@ class UsersController < ApplicationController
   end
 
   def update
-binding.pry
     @user.update(user_params)
     if @user.save
       flash[:notice] = 'User Account updated.'
       render :show
     else
       render :edit
-   end
+    end
   end
 
   def destroy

@@ -42,14 +42,14 @@ class DietsController < ApplicationController
     if @diet.delete
       flash[:notice] = "Diet deleted, user must choose new diet."
       redirect_to diets_path
-    else 
+    else
       flash[:notice] = @diet.errors.full_messages
       redirect_to diet_path(@diet)
     end
   end
 
   private
-    def set_diet 
+    def set_diet
       @diet = Diet.find_by_id(params[:id])
     end
 
