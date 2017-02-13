@@ -49,7 +49,8 @@ class User < ApplicationRecord
   def user_cals
     cals = []
     meals.each do |meal|
-      cals.push(meal.food.cals)
+      meal_cals = meal.qty * meal.food.cals
+      cals.push(meal_cals)
     end
     cals.inject(0) { |sum, x| sum + x }
   end
@@ -77,6 +78,8 @@ class User < ApplicationRecord
   end
 
   def meals_attributes=(meals_attributes)
+binding.pry
+
     meals_attributes.each do |_i, meal_attributes|
       if meal_attributes[:food_id].present?
         meals.create(meal_attributes)
@@ -89,6 +92,14 @@ class User < ApplicationRecord
       else
         errors.full_messages
       end
+    end
+  end
+
+  def logs_attributes=(logs_attributes)
+binding.pry
+
+    logs_attributes.values.each do |log_attributes|
+      self.logs.build(log_attributes)
     end
   end
 
