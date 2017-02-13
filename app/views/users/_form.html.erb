@@ -21,7 +21,7 @@
     <%= f.fields_for :logs do |l| %>
     <% if !l.object.id.present? %>
       <%= l.label :date %><br>
-      <%= l.date_field :date %><br>
+      <%= l.date_select:date %><br>
 
       <%= l.label :note %>
       <%= l.text_area :note %>
