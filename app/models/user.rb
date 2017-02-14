@@ -23,7 +23,7 @@ class User < ApplicationRecord
   scope :lumberjacks, -> { where(diet_id: '7') }
   scope :vampires, -> { where(diet_id: '8') }
   scope :junkers, -> { where(diet_id: '9') }
-
+ 
   def self.group_cals(group)
     cals = []
     group.each do |user|

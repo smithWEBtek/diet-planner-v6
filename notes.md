@@ -1,12 +1,12 @@
 notes: rails portfolio project: diet-planner
 
+170214
+
 
 170213
-
+-[] Are my load_stats methods, creating too much db activity?
 -[] Add error handling back into nested log form on user edit page
--[] Try to implement log form directly on User Show page
-
-
+ 
 Rails assessment notes: 
   Monday, February 13, 2017 8:51 AM
   Questions: 
@@ -36,7 +36,7 @@ Refactor Feature:
       
       SOLUTION: current_user.update_without_password(user_params)
       Notes: 
-        So, I put binding.pry before and after, and I found that current_user was same as @user, 
+        I put binding.pry before and after, and I found that current_user was same as @user, 
         just before @user.update(user_params)
 
         Then, after update, @user was updated, but current_user becomes nil!
@@ -44,10 +44,7 @@ Refactor Feature:
         At the binding.pry, I entered current_user.methods, just to see what the list showed. 
         One of them was :update_without_password
 
-        
-
-
-
+      
   2. Something sexier with scoped resource(s)
 
   3. User show page, download stats

@@ -5,7 +5,7 @@ class Meal < ApplicationRecord
 
   validates :qty, presence: true, numericality: true
   validate :valid_id_or_new_food, :warn_existing_food_saved
-
+ 
   def valid_id_or_new_food
     if food_id.nil? && new_food == ''
       errors.add(:food_id, 'must exist in drop-down menu, or please enter a new_food.')
