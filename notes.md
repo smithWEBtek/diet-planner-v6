@@ -2,21 +2,23 @@ notes: rails portfolio project: diet-planner
 
 
 170213
+
+-[] Add error handling back into nested log form on user edit page
+-[] Try to implement log form directly on User Show page
+
+
 Rails assessment notes: 
-
-  Monday, February 13, 2017
-  8:51 AM
-
+  Monday, February 13, 2017 8:51 AM
   Questions: 
     1. User update account, logs out.
     2. User edit form, error code made it hang indefinitely.
 
 ToDo before next mtg: 
--[] Install instructions
--[] License file, MIT open source
--[] Contributors Guide
--[] More commits
--[] Add nested Log form to Edit User Page:
+-[x] Install instructions
+-[x] License file, MIT open source
+-[x] Contributors Guide
+-[x] More commits
+-[x] Add nested Log form to Edit User Page:
     http://stackoverflow.com/questions/39628394/custom-attribute-setter-method-in-nested-forms
 
   Read Rubber Duck article(s): 
@@ -31,6 +33,21 @@ Refactor Feature:
       i. Flash message shows update successful
       ii. User show page doesn't refresh
       iii. If you refresh, it signs you out and you have to log back in.
+      
+      SOLUTION: current_user.update_without_password(user_params)
+      Notes: 
+        So, I put binding.pry before and after, and I found that current_user was same as @user, 
+        just before @user.update(user_params)
+
+        Then, after update, @user was updated, but current_user becomes nil!
+
+        At the binding.pry, I entered current_user.methods, just to see what the list showed. 
+        One of them was :update_without_password
+
+        
+
+
+
   2. Something sexier with scoped resource(s)
 
   3. User show page, download stats
