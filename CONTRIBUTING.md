@@ -2,6 +2,8 @@
 Contributing
 We love pull requests from everyone. By participating in this project, you agree to abide by the GoldenRule code of conduct.
 
+Please correspond via email: info@smithWEBtek.com
+
 Fork, then clone the repo:
 
 git clone https://github.com/<your_user_name>/diet-planner-v6.git
