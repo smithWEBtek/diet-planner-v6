@@ -14,20 +14,21 @@ class MealsController < ApplicationController
   end
 
   def new
+    # @meals = [
+    #   Meal.new(mealname_id: 1, user_id: current_user.id),
+    #   Meal.new(mealname_id: 2, user_id: current_user.id),
+    #   Meal.new(mealname_id: 3, user_id: current_user.id)
+    # ]
 
-    @meals = [
-    Meal.new(mealname_id: 1, user_id: current_user.id),
-    Meal.new(mealname_id: 2, user_id: current_user.id),
-    Meal.new(mealname_id: 3, user_id: current_user.id)
-  ]
-
-    @meal = @meals[0]
-    # current_user.meals.build(mealname_id: 1)
-    # current_user.meals.build(mealname_id: 2)
-    # current_user.meals.build(mealname_id: 3)
+    # @meal = @meals[0]
+    
+    current_user.meals.build(mealname_id: 1)
+    current_user.meals.build(mealname_id: 2)
+    current_user.meals.build(mealname_id: 3)
   end
   
   def create
+    binding.pry 
     @meal = Meal.create(meal_params)
     if @meal.save
       flash[:notice] = "Meal created."

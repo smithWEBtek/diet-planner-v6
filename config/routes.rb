@@ -28,8 +28,6 @@ Rails.application.routes.draw do
   end
 
   post '/users/sign_up', to: 'users#create'
-  post '/users/:id/meals/new', to: 'meals#create'
-
   post '/mealnames', to: 'mealnames#create'
 
   resources :diets
