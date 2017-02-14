@@ -2,7 +2,7 @@ notes: rails portfolio project: diet-planner
 
 170214
 -[] Add error handling back into nested log form on user edit page
- 
+-[] Move the new meal functionality out of User.rb
 
 170213
 -[] Are my load_stats methods, creating too much db activity?

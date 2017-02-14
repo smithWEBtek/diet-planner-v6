@@ -14,16 +14,24 @@ class MealsController < ApplicationController
   end
 
   def new
-    current_user.meals.build(mealname_id: 1)
-    current_user.meals.build(mealname_id: 2)
-    current_user.meals.build(mealname_id: 3)
+
+    @meals = [
+    Meal.new(mealname_id: 1, user_id: current_user.id),
+    Meal.new(mealname_id: 2, user_id: current_user.id),
+    Meal.new(mealname_id: 3, user_id: current_user.id)
+  ]
+
+    @meal = @meals[0]
+    # current_user.meals.build(mealname_id: 1)
+    # current_user.meals.build(mealname_id: 2)
+    # current_user.meals.build(mealname_id: 3)
   end
   
   def create
     @meal = Meal.create(meal_params)
     if @meal.save
       flash[:notice] = "Meal created."
-      redirect_to user_logs_path(current_user)
+      redirect_to user_path(current_user)
     else
       flash[:notice] = @meal.errors.full_messages
       render 'meals/new'
