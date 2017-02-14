@@ -37,7 +37,9 @@ class UsersController < ApplicationController
   end
 
   def update
+# binding.pry
     @user.update_without_password(user_params)
+# binding.pry
     if @user.save
       flash[:notice] = 'User Account updated.'
       redirect_to user_path(@user)

@@ -26,7 +26,7 @@ class MealsController < ApplicationController
       redirect_to user_logs_path(current_user)
     else
       flash[:notice] = @meal.errors.full_messages
-      render :new
+      render 'meals/new'
     end
   end
 

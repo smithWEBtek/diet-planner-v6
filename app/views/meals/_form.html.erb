@@ -2,6 +2,7 @@
   <%= f.fields_for :meals do |meal_builder| %>
 
     <% if meal_builder.object.errors.any? %>
+    <% binding.pry %>
       <div id="error_explanation" class="flash_style">
         <h2>There were some errors:</h2>
         <ul>
