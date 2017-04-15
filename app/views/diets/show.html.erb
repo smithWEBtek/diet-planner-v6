@@ -6,7 +6,7 @@
 <% if current_user.admin? %>
 <%= link_to "Edit", edit_diet_path(@diet) %>
 |
-<%= link_to "Delete", diet_path(@diet), :method => :delete, :action => "destroy" %>
+<%= link_to "Delete", diet_path(@diet), method: :delete, data: { confirm: "Are you sure?" } %>
 |
 <%= link_to "New", new_diet_path %>
 <% end %>

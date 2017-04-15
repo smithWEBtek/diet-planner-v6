@@ -15,5 +15,5 @@
     Note: <%= @meal.note %>
   </p>
 <%= link_to 'Edit', edit_meal_path(@meal) %> -
-<%= link_to 'Delete', meal_path, :method => :delete, :confirm => 'Are you sure?' %>
+<%= link_to 'Delete', meal_path, method: :delete, data: { confirm: "Are you sure?" } %>
  

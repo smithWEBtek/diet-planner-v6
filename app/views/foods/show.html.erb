@@ -5,5 +5,5 @@
 </div>
 <% if current_user.admin? %>
   <%= link_to "Edit", edit_food_path(@food) %> | 
-  <%= link_to "Delete", food_path(@food), :method => :delete, :action => "destroy" %>
+  <%= link_to "Delete", food_path(@food), method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
