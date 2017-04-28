@@ -15,9 +15,17 @@ class LogsController < ApplicationController
       @meals = current_user.meals
       @logs = current_user.logs
     end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @logs }
+    end
   end
 
   def show
+     respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @log }
+    end
   end
 
   def create

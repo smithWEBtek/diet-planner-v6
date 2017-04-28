@@ -8,9 +8,17 @@ class MealsController < ApplicationController
     else
       @meals = current_user.meals.sort_by {|m| [m.created_at, m.mealname_id]}
     end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @meals }
+    end
   end
 
   def show
+     respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @meal }
+    end
   end
 
   def new

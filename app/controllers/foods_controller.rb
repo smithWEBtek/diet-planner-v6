@@ -4,9 +4,17 @@ class FoodsController < ApplicationController
   before_action :load_models
 
   def index
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @foods }
+    end
   end
-
+  
   def show
+     respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @food }
+    end
   end
 
   def new

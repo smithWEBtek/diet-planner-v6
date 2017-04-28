@@ -4,9 +4,17 @@ class GroupsController < ApplicationController
   before_action :load_models
 
   def index
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @groups }
+    end
   end
-
+  
   def show
+     respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @group }
+    end
   end
 
   def new
