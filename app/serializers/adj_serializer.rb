@@ -1,4 +1,4 @@
 class AdjSerializer < ActiveModel::Serializer
   attributes :id, :name
-  has_many :quotes, serializer: QuoteSerializer
+  has_many :quotes
 end

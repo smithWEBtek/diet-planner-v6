@@ -1,3 +1,4 @@
 class PhraseSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :content
+  has_many :quotes
 end
