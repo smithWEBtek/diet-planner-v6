@@ -35,26 +35,49 @@ class AdminController < ApplicationController
 # , @logs, @groups, @diets, @foods, @meals]
       respond_to do |format|
       format.html { render 'admin/index' }
-      format.json { render json: @users, @logs }
+      format.json { render json: @users }
     end
   end
 
   def api_users
-
+    @users = User.all
+      respond_to do |format|
+      format.html { render 'admin/index' }
+      format.json { render json: @users }
+    end
   end
 
   def api_logs
-
+    @logs = Log.all
+      respond_to do |format|
+      format.html { render 'admin/index' }
+      format.json { render json: @logs }
+    end
   end
 
-  def api_groups
-
+  def api_diets
+    @diets = Diet.all
+      respond_to do |format|
+      format.html { render 'admin/index' }
+      format.json { render json: @diets }
+    end
   end
 
+  def api_foods
+    @foods = Food.all
+      respond_to do |format|
+      format.html { render 'admin/index' }
+      format.json { render json: @foods }
+    end
+  end
 
-
-
-
+  def api_meals
+    @meals = Meal.all
+      respond_to do |format|
+      format.html { render 'admin/index' }
+      format.json { render json: @meals }
+    end
+  end
 
   private
     def authorize_admin

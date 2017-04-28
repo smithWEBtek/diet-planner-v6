@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   root 'welcome#home'
   get '/home', to: 'welcome#home'
 
+  get '/api_users', to: 'admin#api_users'
+  get '/api_logs', to: 'admin#api_logs'
+  get '/api_groups', to: 'admin#api_groups'
+  get '/api_diets', to: 'admin#api_diets'
+  get '/api_foods', to: 'admin#api_foods'
+  get '/api_meals', to: 'admin#api_meals' 
+
   get '/welcome/goodbye', to: 'admin#user_cancellation'
   get '/group_update', to: 'admin#group_update'
   get '/export_users_data', to: 'admin#export_users_data'
