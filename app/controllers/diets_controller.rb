@@ -2,14 +2,26 @@ class DietsController < ApplicationController
   before_action :authorize_admin, only: [:edit, :update, :destroy]
   before_action :set_diet, only: [:show, :edit, :update, :destroy]
   before_action :load_models
+
   def index
     load_diet_stats
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @diets }
+    end
   end
+
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @diet }
+    end
   end
+
   def new
     @diet = Diet.new
   end
+
   def create
     @diet = Diet.new(diet_params)
     if @diet.save
@@ -19,8 +31,10 @@ class DietsController < ApplicationController
       render :new
     end
   end
+
   def edit
   end
+  
   def update
     @diet.update(diet_params)
     if @diet.save
@@ -30,6 +44,7 @@ class DietsController < ApplicationController
       render :new
     end
   end
+  
   def destroy
     @diet.reset_user_diet_id
     if @diet.delete
@@ -40,11 +55,12 @@ class DietsController < ApplicationController
       redirect_to diet_path(@diet)
     end
   end
+
   private
-  def set_diet
-    @diet = Diet.find_by_id(params[:id])
-  end
-  def diet_params
-    params.require(:diet).permit(:name)
-  end
+    def set_diet
+      @diet = Diet.find_by_id(params[:id])
+    end
+    def diet_params
+      params.require(:diet).permit(:name)
+    end
 end

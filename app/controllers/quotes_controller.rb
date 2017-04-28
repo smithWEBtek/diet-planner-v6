@@ -7,7 +7,8 @@ class QuotesController < ApplicationController
     end
 
     def clear_quotes
-      Quote.clear_quotes
+      Quote.destroy_all
+      ActiveRecord::Base.connection.reset_pk_sequence!('quotes')
       redirect_to root_path
     end
 
@@ -30,6 +31,10 @@ class QuotesController < ApplicationController
     end
 
     def show
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @quote }
+      end
     end
 
     def create
