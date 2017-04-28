@@ -14,6 +14,7 @@ class QuotesController < ApplicationController
 
     def new
       @quote = Quote.new
+      render layout: false
     end
 
     def index
