@@ -1,1 +1,4 @@
-quote.js
+
+$(function(){
+		
+})
