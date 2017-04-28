@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>DietTracker</title>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'bootstrap' %>
+      <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 
   </head>
   <body>
+
     <div class="container">
       <%= render 'layouts/header' %>
       <%= render partial: 'admin/admin_nav' if current_user && current_user.admin? %>
@@ -20,6 +24,7 @@
       <%= yield %>
       </div>
     </div>
-  </div>
+  </div>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </body>
 </html>
