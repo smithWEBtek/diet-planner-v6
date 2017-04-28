@@ -18,7 +18,7 @@ class QuotesController < ApplicationController
     def index
       @quotes = Quote.all
       respond_to do |format|
-        format.html #index.html.erb
+        format.html { render :index }
         format.json { render json: @quotes }
         format.csv
       end
