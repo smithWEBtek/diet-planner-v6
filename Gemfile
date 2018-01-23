@@ -30,7 +30,9 @@ gem 'pry-rails'
 
 #rails, postgres database and puma local server
 gem 'rails', '~> 5.0.1'
-gem 'pg'
+
+gem "pg", "~> 0.21" 
+
 gem 'puma', '~> 3.0'
 gem 'yaml_db'
 
