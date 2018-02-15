@@ -12,7 +12,7 @@ gem 'cloudinary'
 gem 'pdf-reader'
 gem 'rails-erd'
  
-#scraping
+#scrapinggg
 gem 'watir'
 gem 'nokogiri' 
 gem 'httparty'
