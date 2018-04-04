@@ -12,7 +12,7 @@ gem 'cloudinary'
 gem 'pdf-reader'
 gem 'rails-erd'
  
-#scrapinggg
+#scraping
 gem 'watir'
 gem 'nokogiri' 
 gem 'httparty'
@@ -30,9 +30,7 @@ gem 'pry-rails'
 
 #rails, postgres database and puma local server
 gem 'rails', '~> 5.0.1'
-
 gem "pg", "~> 0.21" 
-
 gem 'puma', '~> 3.0'
 gem 'yaml_db'
 
